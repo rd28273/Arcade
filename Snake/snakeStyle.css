@@ -1,0 +1,53 @@
+/* Styles for the entire page */
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: lightcoral;
+  overflow: hidden;
+}
+
+/* IDs */
+
+#myCanvas {
+  position: absolute;
+  width: 900px;
+  height: 500px;
+  left: 333px;
+  margin-top: 10px;
+  background-color: black;
+}
+
+#snakeHeading {
+  margin-left: 520px;
+  text-align: center;
+  color: green;
+  background-color: lightgrey;
+  width: 300px;
+  height: 50px;
+}
+p{
+  font-size: 120px;
+  font-family: 'Verdana', sans-serif;
+  color:white;
+}
+#ButtonMainPage {
+  background-color:orange;
+  color: darkcyan;
+  font-size: 25px;
+  margin-top: 50px;
+  position: absolute;
+  cursor: pointer;
+  top: -40px;
+  left: 10px;
+}
+
+/* Classes */
+
+.button{
+  background-color:white;
+  border: none;
+  text-decoration: none;
+  width: 75px;
+  height: 50px;
+}

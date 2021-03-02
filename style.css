@@ -1,0 +1,47 @@
+/* Styles for the entire page */
+body {
+  background-color: lightcoral;
+}
+
+p{
+  font-size: 20px;
+  font-family: 'Verdana', sans-serif;
+}
+
+/* IDs */
+
+#mainHeader {
+  text-align: center;
+  font-size: 50px;
+  padding-top: 25px;
+  padding-bottom: 25px;
+  margin: 0;
+  background-color: brown;
+}
+
+/* Snake link styles */
+
+#SnakeLink {
+  float: left;
+  margin-left: 50px;
+  margin-top: 50px;
+}
+
+#SnakePicLink {
+  height: 125px;
+  width: 400px;
+  border: 2px solid black;
+}
+
+/* Pacman link styles */
+
+#PacmanLink {
+  float: left;
+  margin-top: 50px;
+  margin-left: 100px;
+}
+
+#PacPicLink{  
+  height: 130px;
+}
+
