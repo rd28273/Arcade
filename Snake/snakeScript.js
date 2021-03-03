@@ -1,6 +1,7 @@
-// Some simple variables for the snake position, velocity, and size    
 var snakeX = 135;
 var snakeY = 60;
+var lastTailPosX=0;
+var lastTailPosY=0;
 var lastPart = [];
 var snakeWidth = 5;
 var amountOfParts = 1;
@@ -8,7 +9,8 @@ var snakeHeight = 5;
 var snakeX_V = 0;
 var snakeY_V = 0;
 var snakeLength = 1;
-var paused = false;
+var paused = 1;
+var paused2 = false;
 var pausedXHolder = 0;
 var pausedYHolder = 0;
 var appleX = 0;
@@ -42,48 +44,58 @@ document.addEventListener("keydown", keydown);
 setInterval(loop, 100);
 setInterval(clearSnake, 100);
 setInterval(keyCheck, 1);
-setInterval(pauseFunction, 1);
 
 function draw(){
 }
 
+//Pauses the game
+//does not work yet. I can tell
 function pauseFunction() {
-  if (paused) {
-    pausedXHolder = snakeX_V;
-    pausedYHolder = snakeY_V;
+  while (paused % 2 == 0) {
     snakeX_V = 0;
     snakeY_V = 0;
-    while (paused) {
-      snakeX_V = 0;
-      snakeY_V = 0;
-      ctx.fillStyle = 'green';
-      ctx.fillRect(snakeX, snakeY, snakeWidth, snakeHeight);
-    }
+    ctx.fillStyle = 'green';
+    ctx.fillRect(snakeX, snakeY, snakeWidth, snakeHeight);
   }
-}
+} 
 
 //Pauses the game
 //does not work yet. I can tell
 function pause(){
-  if(paused == false){
-    paused = true;
+  pausedXHolder = snakeX_V;
+  pausedYHolder = snakeY_V;
+
+  paused += 1;
+
+  if (paused % 2 == 0) {
     snakeX_V = 0;
     snakeY_V = 0;
     pauseFunction();
-    
   }
-  
-  if(paused == true){
-    paused = false;
+  else {
     snakeX_V = pausedXHolder;
     snakeY_V = pausedYHolder;
   }
-}
+} 
 
 function createMoreSnake(){
-  if(snakeLength != 0){
-
-  }
+if(snakeLength <= amountOfParts){
+      if(snakeX_V==-5){
+      ctx.fillRect(snakeX+5,snakeY,snakeWidth,snakeHeight);
+      }
+      if(snakeX_V==5){
+      ctx.fillRect(snakeX-5,snakeY,snakeWidth,snakeHeight);
+      }
+      if(snakeY_V==5){
+      ctx.fillRect(snakeX,snakeY-5,snakeWidth,snakeHeight);
+      }
+      if(snakeY_V==-5){
+      ctx.fillRect(snakeX,snakeY+5,snakeWidth,snakeHeight);
+      }
+   }
+}
+function deleteTailOfSnake(){
+   ctx.clearRect();
 }
 // This function makes an apple that the snake can eat.
 function renderApple(){
@@ -207,9 +219,10 @@ function generateApple() {
   }
   ctx.fillRect(appleX, appleY, appleWidth, appleHeight);
 }
+
 function eatApple(){
   if(appleX == snakeX && appleY == snakeY){
-    ctx.clearRect(appleX, appleY, 20, 20);
+    ctx.clearRect(appleX, appleY, 5, 5);
     generateApple();
     newApple = true;  
     amountOfParts+=1;
@@ -220,15 +233,16 @@ function clearSnake() {
   if (gameStart) {
 
   }
-  else
-    ctx.clearRect((snakeX)-snakeX_V, (snakeY)-snakeY_V, snakeWidth, snakeHeight);
+  else{
+  
+  }
 }
 
 function isDead() {
   if (snakeX == -5 || snakeX >= 300){
     die();
   }
-  if(snakeY == -5 || snakeY >= 160){
+  if(snakeY == -5 || snakeY >= 150){
     die();
     endGame();
 }
@@ -247,8 +261,10 @@ function endGame() {
 
 // The actual game loop
 function loop(){
-  //
-  ctx.clearRect((snakeX)-snakeX_V, (snakeY)-snakeY_V, snakeWidth, snakeHeight);
+  //I took out the clear rect for a reason. I have to theory to make a snake tail. The first one is the let the snake draw its own tail(you can see sort of that in the game right now) but the only problem is that it does not remember its position or where it should go direction wise. The other way I thought of was just drawing it using fill rect. this is more complicated so I don't know how to do it so if you know then you can try it out
+
+  //Ok, I am going to continue working on the pause function
+  //sure
   eatApple();  
   snakeX += snakeX_V;
   snakeY += snakeY_V;
@@ -256,8 +272,7 @@ function loop(){
   eatApple();
   isDead();
   //just for test vvvv still need it tho
-  document.getElementById("applex").innerHTML = amountOfParts;
+  document.getElementById("applex").innerHTML = snakeX_V;
 
   //end of test stuff ^^^
 }
-
